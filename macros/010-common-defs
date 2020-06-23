@@ -135,7 +135,7 @@
 # No such option: --strip-file-prefix %%{buildroot} 
 %pyproject_install(+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-=) %{lua:\
     local args = rpm.expand("%**"); \
-    local broot = rpm.expand("-root %buildroot"); \
+    local broot = rpm.expand("--root %buildroot"); \
     local intro = "%{python_expand $python -mpip install " .. broot .. " --no-compile --no-deps  --progress-bar off *.whl "; \
     print(rpm.expand(intro .. args .. "}")) \
 }
