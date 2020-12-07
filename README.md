@@ -162,9 +162,9 @@ is the basename of the flavor executable. Make sure it is in `$PATH`.
   expands to:
   
   ```
-  python2 generatefile.py %python2_bin_suffix`  
-  python3.6 generatefile.py %python36_bin_suffix`
-  python3.8 generatefile.py %python38_bin_suffix`
+  python2 generatefile.py 2.7
+  python3.6 generatefile.py 3.6
+  python3.8 generatefile.py 3.8
   ```
   
   etc. (plus the moving around of the `build` directory in between).
@@ -173,19 +173,19 @@ is the basename of the flavor executable. Make sure it is in `$PATH`.
   
   ```spec
   %{python_expand #
-  %if "$python_" == "python3_"
-  command
-  %endif
+  if [ $python_ = python36_ ]; then
+  $python command-for-py-36-only (we have %{$python_version})
+  fi
   }
   ```
   
   which expands to
     
-  ```spec
+  ```sh
   #
-  %if "python3_" == "python3_"
-  command
-  %endif
+  if [ python38_ = python36_ ]; then
+  python3.8 command-for-py-36-only (we have 3.8)
+  fi
   ```
   
   and so on for all flavors.
