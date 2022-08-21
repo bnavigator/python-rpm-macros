@@ -170,7 +170,6 @@
     print(rpm.expand(intro .. args .. "}")) \
 }
 
-
 ##### Precompile scripts macro #####
 
 %python_compileall \
