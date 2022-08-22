@@ -222,7 +222,11 @@ function python_subpackages()
         if section == "files" then
             return files_headline(flavor, param)
         else
-            return "%" .. section .. " -n " .. package_name(flavor, modname, param) .. "\n"
+            local subpkg; local append
+            if param and param ~= "" then
+                subpkg, append = param:match("^([^-%s]*)%s*(.*)$")
+            end
+            return "%" .. section .. " -n " .. package_name(flavor, modname, subpkg, append) .. "\n"
         end
     end
 
