@@ -198,10 +198,11 @@ function python_subpackages()
     local function section_headline(section, flavor, param)
         if not param then param = "" end
         local subpkg = " " .. param; local flags = ""
-        for flag in subpkg:gmatch("%s(%-[flp]%s+%S+)") do
+        for flag in subpkg:gmatch("(%s%-[flp]%s+%S+)") do
             subpkg = subpkg:gsub(flag, "")
             flags = flags .. flag
         end
+        subpkg = subpkg:gsub("^%s*(.-)%s*$", "%1")
         if section == "files" then
             local python_files = param:match("%%{?python_files}?")
             local filessubpkg = param:match("%%{python_files%s*(.-)}")
