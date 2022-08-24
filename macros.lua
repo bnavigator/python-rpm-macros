@@ -199,9 +199,9 @@ function python_subpackages()
         if not param then param = "" end
         local subpkg = " " .. param; local flags = ""
         for flag in subpkg:gmatch("(%s%-[flp]%s+%S+)") do
-            subpkg = subpkg:gsub(flag, "")
             flags = flags .. flag
         end
+        subpkg = subpkg:gsub("(%s%-[flp]%s+%S+)", "")
         subpkg = subpkg:gsub("^%s*(.-)%s*$", "%1")
         if section == "files" then
             local python_files = param:match("%%{?python_files}?")
